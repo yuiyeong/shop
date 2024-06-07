@@ -12,7 +12,7 @@ open class Item(
     open var stockQuantity: Int,
 
     @ManyToMany(mappedBy = "items")
-    open var categories: List<Category> = listOf(),
+    open var categories: MutableList<Category> = arrayListOf(),
 
     @Id
     @GeneratedValue

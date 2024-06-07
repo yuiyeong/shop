@@ -5,7 +5,7 @@ import jakarta.persistence.*
 @Entity
 class Delivery(
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
-    val order: Order,
+    var order: Order,
 
     @Embedded
     var address: Address,
@@ -16,5 +16,5 @@ class Delivery(
     @Id
     @GeneratedValue
     @Column(name = "delivery_id")
-    val id: Long? = null
+    var id: Long? = null
 ) {}

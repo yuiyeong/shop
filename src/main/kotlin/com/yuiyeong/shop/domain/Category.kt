@@ -17,10 +17,10 @@ class Category(
         joinColumns = [JoinColumn(name = "category_id")],
         inverseJoinColumns = [JoinColumn(name = "item_id")]
     )
-    val items: List<Item> = ArrayList(),
+    val items: MutableList<Item> = arrayListOf(),
 
     @OneToMany(mappedBy = "parent")
-    var child: List<Category> = listOf(),
+    var child: MutableList<Category> = arrayListOf(),
 
     @Id
     @GeneratedValue

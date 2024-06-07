@@ -12,6 +12,6 @@ class Movie(
     name: String,
     price: Int,
     stockQuantity: Int,
-    categories: List<Category> = listOf(),
+    categories: MutableList<Category> = arrayListOf(),
     id: Long? = null
 ) : Item(name, price, stockQuantity, categories, id) {}

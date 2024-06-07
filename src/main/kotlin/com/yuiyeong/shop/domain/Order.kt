@@ -11,7 +11,7 @@ class Order(
     var member: Member,
 
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
-    var orderItems: List<OrderItem>,
+    var orderItems: MutableList<OrderItem>,
 
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     var delivery: Delivery,
@@ -25,4 +25,5 @@ class Order(
     @GeneratedValue
     @Column(name = "order_id")
     var id: Long? = null
-) {}
+) {
+}
