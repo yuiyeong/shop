@@ -3,9 +3,9 @@ package com.yuiyeong.shop.domain
 import jakarta.persistence.*
 
 @Entity
-class Delivery(
+class Delivery protected constructor(
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
-    var order: Order,
+    var order: Order?,
 
     @Embedded
     var address: Address,
@@ -17,4 +17,10 @@ class Delivery(
     @GeneratedValue
     @Column(name = "delivery_id")
     var id: Long? = null
-) {}
+) {
+    companion object {
+        fun createDelivery(address: Address): Delivery {
+            return Delivery(null, address)
+        }
+    }
+}
