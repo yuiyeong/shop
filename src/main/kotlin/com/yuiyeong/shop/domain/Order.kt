@@ -26,4 +26,9 @@ class Order(
     @Column(name = "order_id")
     var id: Long? = null
 ) {
+    init {
+        member.orders.add(this)
+        orderItems.forEach { it.order = this }
+        delivery.order = this
+    }
 }

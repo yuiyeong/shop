@@ -18,4 +18,11 @@ open class Item(
     @GeneratedValue
     @Column(name = "item_id")
     open var id: Long? = null
-) {}
+) {
+    fun reduceStockQuantity(quantity: Int) {
+        val newStockQuantity = stockQuantity - quantity
+        if (newStockQuantity < 0)
+            throw IllegalStateException("quantity is greater than stockQuantity")
+        stockQuantity = newStockQuantity
+    }
+}
