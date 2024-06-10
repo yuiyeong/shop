@@ -3,24 +3,29 @@ package com.yuiyeong.shop.domain
 import jakarta.persistence.*
 
 @Entity
-class Delivery protected constructor(
-    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
-    var order: Order?,
-
-    @Embedded
-    var address: Address,
-
-    @Enumerated(EnumType.STRING)
-    var status: DeliveryStatus = DeliveryStatus.READY,
-
+class Delivery(address: Address) {
     @Id
     @GeneratedValue
     @Column(name = "delivery_id")
     var id: Long? = null
-) {
+        private set
+
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
+    var order: Order? = null
+        private set
+
+    @Embedded
+    var address: Address = address
+        private set
+
+    @Enumerated(EnumType.STRING)
+    var status: DeliveryStatus = DeliveryStatus.READY
+        private set
+
+
     companion object {
         fun createDelivery(address: Address): Delivery {
-            return Delivery(null, address)
+            return Delivery(address)
         }
     }
 }
