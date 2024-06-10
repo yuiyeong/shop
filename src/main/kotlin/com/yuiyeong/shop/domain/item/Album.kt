@@ -6,11 +6,11 @@ import jakarta.persistence.Entity
 @Entity
 @DiscriminatorValue("A")
 class Album(
+    artist: String,
+    etc: String,
     name: String,
     price: Int,
-    stockQuantity: Int,
-    artist: String,
-    etc: String
+    stockQuantity: Int
 ) : Item(name, price, stockQuantity) {
     var artist: String = artist
         private set
