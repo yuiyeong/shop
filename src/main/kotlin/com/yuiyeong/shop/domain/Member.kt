@@ -3,11 +3,21 @@ package com.yuiyeong.shop.domain
 import jakarta.persistence.*
 
 @Entity
-class Member(
-    var name: String,
-    @Embedded var address: Address,
-    @OneToMany(mappedBy = "member") var orders: MutableList<Order> = arrayListOf(),
+class Member(name: String, address: Address) {
+    @Id
+    @GeneratedValue
+    @Column(name = "member_id")
+    var id: Long? = null
+        private set
 
-    @Id @GeneratedValue
-    @Column(name = "member_id") var id: Long? = null
-) {}
+    var name: String = name
+        private set
+
+    @Embedded
+    var address: Address = address
+        private set
+
+    @OneToMany(mappedBy = "member")
+    var orders: MutableList<Order> = arrayListOf()
+        private set
+}
