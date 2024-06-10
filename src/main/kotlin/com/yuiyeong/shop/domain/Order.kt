@@ -5,30 +5,30 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "orders")
-class Order(
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    var member: Member,
-
-    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
-    var orderItems: MutableList<OrderItem>,
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    var delivery: Delivery,
-
-    var orderDate: LocalDateTime = LocalDateTime.now(),
-
-    @Enumerated(EnumType.STRING)
-    var status: OrderStatus = OrderStatus.ORDER,
-
+class Order(member: Member, delivery: Delivery, orderItems: MutableList<OrderItem>) {
     @Id
     @GeneratedValue
     @Column(name = "order_id")
     var id: Long? = null
-) {
-    init {
-        member.orders.add(this)
-        orderItems.forEach { it.order = this }
-        delivery.order = this
-    }
+        private set
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    var member: Member = member
+        private set
+
+    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
+    var orderItems: MutableList<OrderItem> = orderItems
+        private set
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var delivery: Delivery = delivery
+        private set
+
+    var orderDate: LocalDateTime = LocalDateTime.now()
+        private set
+
+    @Enumerated(EnumType.STRING)
+    var status: OrderStatus = OrderStatus.ORDER
+        private set
 }

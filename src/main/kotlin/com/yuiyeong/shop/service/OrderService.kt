@@ -24,7 +24,7 @@ class OrderService @Autowired constructor(
         val orderItem = OrderItem.createOrderItem(item, item.price, count)
 
         val delivery = Delivery.createDelivery(member.address)
-        val order = Order(member, arrayListOf(orderItem), delivery)
+        val order = Order(member, delivery, mutableListOf(orderItem))
         orderRepository.save(order)
         return order.id!!
     }

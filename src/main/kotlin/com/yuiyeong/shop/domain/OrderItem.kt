@@ -31,7 +31,7 @@ class OrderItem(item: Item, orderPrice: Int, count: Int) {
     companion object {
         fun createOrderItem(item: Item, orderPrice: Int, count: Int): OrderItem {
             val orderItem = OrderItem(item, orderPrice, count)
-            item.reduceStockQuantity(count)
+            item.reduceStockQuantity(count) // TODO 여기서 reduce 를 하는 것이 맞는지 한번 생각해보기
             return orderItem
         }
     }
