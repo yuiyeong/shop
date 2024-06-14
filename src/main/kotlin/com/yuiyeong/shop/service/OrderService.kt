@@ -37,8 +37,8 @@ class OrderService @Autowired constructor(
         return orderRepository.findAllByStatusAndMemberName(OrderSearch(null, null))
     }
 
-    fun findAllWithMemberDelivery(): List<Order> {
-        return orderRepository.findAllWithMemberDelivery()
+    fun findAllWithMemberDelivery(offset: Int = 0, limit: Int = 100): List<Order> {
+        return orderRepository.findAllWithMemberDelivery(offset, limit)
     }
 
     fun findAllByQueryDto(): List<OrderQueryDto> {

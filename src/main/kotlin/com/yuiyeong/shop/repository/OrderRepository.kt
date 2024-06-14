@@ -45,12 +45,15 @@ class OrderRepository(@Autowired private val em: EntityManager) {
         return query.resultList
     }
 
-    fun findAllWithMemberDelivery(): List<Order> {
+    fun findAllWithMemberDelivery(offset: Int, limit: Int): List<Order> {
         return em.createQuery(
             "select o from Order o" +
                     " join fetch o.member m" +
                     " join fetch o.delivery d", Order::class.java
-        ).resultList
+        )
+            .setFirstResult(offset)
+            .setMaxResults(limit)
+            .resultList
     }
 
     fun findAllWithItems(): List<Order> {
