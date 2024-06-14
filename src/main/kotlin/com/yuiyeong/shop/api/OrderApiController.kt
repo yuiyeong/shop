@@ -15,4 +15,10 @@ class OrderApiController(@Autowired private val orderService: OrderService) {
         val list = orderService.findAll().map { OrderDto.create(it) }
         return ListResult(list)
     }
+
+    @GetMapping("/api/v3/orders")
+    fun findOrdersV3(): ListResult<OrderDto> {
+        val list = orderService.findAllWithItems().map { OrderDto.create(it) }
+        return ListResult(list)
+    }
 }

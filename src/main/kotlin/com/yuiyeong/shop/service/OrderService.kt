@@ -44,4 +44,8 @@ class OrderService @Autowired constructor(
     fun findAllByQueryDto(): List<OrderQueryDto> {
         return orderQueryRepository.findAll()
     }
+
+    fun findAllWithItems(): List<Order> {
+        return orderRepository.findAllWithItems()
+    }
 }

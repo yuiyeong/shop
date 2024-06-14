@@ -52,4 +52,16 @@ class OrderRepository(@Autowired private val em: EntityManager) {
                     " join fetch o.delivery d", Order::class.java
         ).resultList
     }
+
+    fun findAllWithItems(): List<Order> {
+        // distinct 로 중복 order 제거
+        // 이 쿼리로는 paging 은 불가.
+        return em.createQuery(
+            "select distinct o from Order o" +
+                    " join fetch o.member m" +
+                    " join fetch o.delivery d" +
+                    " join fetch o.orderItems oi" +
+                    " join fetch oi.item i", Order::class.java
+        ).resultList
+    }
 }
