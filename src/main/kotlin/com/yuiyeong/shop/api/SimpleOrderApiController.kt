@@ -2,6 +2,7 @@ package com.yuiyeong.shop.api
 
 import com.yuiyeong.shop.api.dto.ListResult
 import com.yuiyeong.shop.api.dto.SimpleOrderDto
+import com.yuiyeong.shop.repository.query.OrderQueryDto
 import com.yuiyeong.shop.service.OrderService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -21,6 +22,12 @@ class SimpleOrderApiController(@Autowired private val orderService: OrderService
     fun getOrdersV3(): ListResult<SimpleOrderDto> {
         val list = orderService.findAllWithMemberDelivery()
             .map { SimpleOrderDto(it.id!!, it.member.name, it.orderDate, it.status, it.delivery.address) }
+        return ListResult(list)
+    }
+
+    @GetMapping("/api/v4/simple-orders")
+    fun getOrdersV4(): ListResult<OrderQueryDto> {
+        val list = orderService.findAllByQueryDto()
         return ListResult(list)
     }
 }

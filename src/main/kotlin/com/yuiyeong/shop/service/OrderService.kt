@@ -7,6 +7,8 @@ import com.yuiyeong.shop.repository.ItemRepository
 import com.yuiyeong.shop.repository.MemberRepository
 import com.yuiyeong.shop.repository.OrderRepository
 import com.yuiyeong.shop.repository.OrderSearch
+import com.yuiyeong.shop.repository.query.OrderQueryDto
+import com.yuiyeong.shop.repository.query.OrderQueryRepository
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service
 @Service
 class OrderService @Autowired constructor(
     private val orderRepository: OrderRepository,
+    private val orderQueryRepository: OrderQueryRepository,
     private val itemRepository: ItemRepository,
     private val memberRepository: MemberRepository,
 ) {
@@ -36,5 +39,9 @@ class OrderService @Autowired constructor(
 
     fun findAllWithMemberDelivery(): List<Order> {
         return orderRepository.findAllWithMemberDelivery()
+    }
+
+    fun findAllByQueryDto(): List<OrderQueryDto> {
+        return orderQueryRepository.findAll()
     }
 }
