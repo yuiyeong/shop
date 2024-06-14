@@ -43,4 +43,10 @@ class OrderRepository(@Autowired private val em: EntityManager) {
         val query = em.createQuery(cq).setMaxResults(1000) //최대 1000 건
         return query.resultList
     }
+
+    fun findAllWithMemberDelivery() : List<Order> {
+        return em.createQuery("select o from Order o" +
+                " join fetch o.member m" +
+                " join fetch o.delivery d", Order::class.java).resultList
+    }
 }

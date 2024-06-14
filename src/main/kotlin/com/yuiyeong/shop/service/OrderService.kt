@@ -6,6 +6,7 @@ import com.yuiyeong.shop.domain.OrderItem
 import com.yuiyeong.shop.repository.ItemRepository
 import com.yuiyeong.shop.repository.MemberRepository
 import com.yuiyeong.shop.repository.OrderRepository
+import com.yuiyeong.shop.repository.OrderSearch
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -27,5 +28,13 @@ class OrderService @Autowired constructor(
         val order = Order(member, delivery, mutableListOf(orderItem))
         orderRepository.save(order)
         return order.id!!
+    }
+
+    fun findAll(): List<Order> {
+        return orderRepository.findAllByStatusAndMemberName(OrderSearch(null, null))
+    }
+
+    fun findAllWithMemberDelivery(): List<Order> {
+        return orderRepository.findAllWithMemberDelivery()
     }
 }
