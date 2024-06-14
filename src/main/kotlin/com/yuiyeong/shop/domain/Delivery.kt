@@ -22,6 +22,9 @@ class Delivery(address: Address) {
     var status: DeliveryStatus = DeliveryStatus.READY
         private set
 
+    fun determineOrder(order: Order) {
+        this.order = order
+    }
 
     companion object {
         fun createDelivery(address: Address): Delivery {

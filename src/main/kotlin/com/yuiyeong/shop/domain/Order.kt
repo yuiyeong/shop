@@ -31,4 +31,10 @@ class Order(member: Member, delivery: Delivery, orderItems: MutableList<OrderIte
     @Enumerated(EnumType.STRING)
     var status: OrderStatus = OrderStatus.ORDER
         private set
+
+    init {
+        member.orders.add(this)
+        delivery.determineOrder(this)
+        orderItems.forEach { it.determineOrder(this) }
+    }
 }

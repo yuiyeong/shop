@@ -27,6 +27,9 @@ class OrderItem(item: Item, orderPrice: Int, count: Int) {
     var count: Int = count
         private set
 
+    fun determineOrder(order: Order) {
+        this.order = order
+    }
 
     companion object {
         fun createOrderItem(item: Item, orderPrice: Int, count: Int): OrderItem {
