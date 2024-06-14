@@ -21,6 +21,7 @@ class OrderRepository(@Autowired private val em: EntityManager) {
     }
 
     fun findAllByStatusAndMemberName(orderSearch: OrderSearch): MutableList<Order> {
+        // TODO: 정상적으로 동작하지 않음.
         val cb = em.criteriaBuilder
         val cq = cb.createQuery(Order::class.java)
         val orderRoot = cq.from(Order::class.java)
@@ -44,9 +45,11 @@ class OrderRepository(@Autowired private val em: EntityManager) {
         return query.resultList
     }
 
-    fun findAllWithMemberDelivery() : List<Order> {
-        return em.createQuery("select o from Order o" +
-                " join fetch o.member m" +
-                " join fetch o.delivery d", Order::class.java).resultList
+    fun findAllWithMemberDelivery(): List<Order> {
+        return em.createQuery(
+            "select o from Order o" +
+                    " join fetch o.member m" +
+                    " join fetch o.delivery d", Order::class.java
+        ).resultList
     }
 }
