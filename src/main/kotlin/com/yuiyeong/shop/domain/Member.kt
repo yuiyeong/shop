@@ -20,4 +20,8 @@ class Member(name: String, address: Address) {
     @OneToMany(mappedBy = "member")
     var orders: MutableList<Order> = arrayListOf()
         private set
+
+    fun changeName(name: String) {
+        this.name = name
+    }
 }
